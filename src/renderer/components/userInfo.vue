@@ -4,12 +4,24 @@
             <div class="userImgBox">
                 <img class="userImg"  :src="userList.face"/>
                 <div class="uname">{{userList.uname}}</div>
-                <div :class="'lv lv'+userList.level_info.current_level">LV{{userList.level_info.current_level}}</div>
-                <div class="livelv">LV{{userList3.user_level}}</div>
-                <div class="progressbar">
-                    <div class="bluebar" :style="{width:probar+'%'}"></div>
-                    <div class="exp"><span>{{userList.level_info.current_exp}}/{{userList.level_info.next_exp}}</span></div>
+
+                <!-- <div class="livelv">LV{{userList3.user_level}}</div> -->
+                <div class="lvbox">
+                    <div class="progressbar">
+                        <div class="bluebar" :style="{width:probar+'%'}"></div>
+                        <div class="exp"><span>{{userList.level_info.current_exp}}/{{userList.level_info.next_exp}}</span></div>
+                    </div>
+                    <div :class="'lv lv'+userList.level_info.current_level">LV{{userList.level_info.current_level}}</div>
                 </div>
+
+                <div class="lvbox">
+                    <div class="progressbar">
+                        <div class="bluebar" :style="{width:proba2r+'%'}"></div>
+                        <div class="exp"><span>{{userList3.user_intimacy}}/{{userList3.user_next_intimacy}}</span></div>
+                    </div>
+                     <div class="livelv">LV{{userList3.user_level}}</div>
+                </div>
+                
                 <div class="info">
                     <div><span class="iconUid">UID</span>&nbsp;{{userList.wallet.mid}}</div>
                     <div><span class="iconUid">硬币数</span>&nbsp;{{userList.money}}</div>
@@ -31,7 +43,8 @@ export default {
             userList:[],
             userList2:[],
             userList3:[],
-            probar:0
+            probar:0,
+            liveprobar:0
         }
     },
      methods:{
@@ -50,10 +63,12 @@ export default {
             userInfo().then(res=>{
                 this.userList=res.data
                 this.probar=parseInt(this.getPercent(res.data.level_info.current_exp,res.data.level_info.next_exp))
+               
                 console.log(this.probar)
             })
             liveUserInfo().then(res=>{
                 this.userList3=res.data
+                this.proba2r=parseInt(this.getPercent(res.data.user_intimacy,res.data.user_next_intimacy))
                 console.log(res.data)
             })
             
@@ -67,6 +82,7 @@ export default {
 </script>
 
 <style scoped>
+
     
     .iconUid{
         font-size: 0.13rem;
@@ -99,6 +115,7 @@ export default {
     .progressbar{
         border: 0.01rem solid white;
         position: relative;
+        display: inline-block;
         width: 2rem;
         height: 0.14rem;
         background: transparent;
