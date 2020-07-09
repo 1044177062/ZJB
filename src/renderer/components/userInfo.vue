@@ -29,7 +29,9 @@
                     <div><span class="iconUid">金瓜子</span>&nbsp;{{userList3.gold}}</div>
                 </div>
             </div>
-            
+             <div class="userImgBox fffline">
+                 321321
+             </div>
         </div>
     </div>
 </template>
@@ -44,7 +46,7 @@ export default {
             userList2:[],
             userList3:[],
             probar:0,
-            liveprobar:0
+            proba2r:0
         }
     },
      methods:{
@@ -63,7 +65,6 @@ export default {
             userInfo().then(res=>{
                 this.userList=res.data
                 this.probar=parseInt(this.getPercent(res.data.level_info.current_exp,res.data.level_info.next_exp))
-               
                 console.log(this.probar)
             })
             liveUserInfo().then(res=>{
@@ -83,6 +84,9 @@ export default {
 
 <style scoped>
 
+    .fffline{
+        border-top: 1px solid white;
+    }
     
     .iconUid{
         font-size: 0.13rem;

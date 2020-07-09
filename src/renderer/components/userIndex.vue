@@ -3,13 +3,13 @@
         <div class="main">
             <div class="leftBox">
                 <div class="btnBox" @click="isShow('1')">基本信息</div>
-                <div class="btnBox" @click="isShow('2')">工具页</div>
+                <div class="btnBox" @click="isShow('2')">日志</div>
                 <div class="btnBox">等待添加</div>
                 <div class="btnBox" @click="exitLogin()">退出登入</div>
             </div>
             <div class="rightBox">
-                 <userinfo rel="userindex" v-if="isShowValue==1"></userinfo>
-                 <util v-if="isShowValue==2"></util>
+                 <userinfo :class="isShowValue==1?'topIndex':'bottomIndex'"  rel="userindex" v-if="isShowValue==1"></userinfo>
+                 <util :class="isShowValue==2?'topIndex':'bottomIndex'"></util>
             </div>
         </div>
     </div>
@@ -46,6 +46,18 @@ export default {
 </script>
 
 <style scoped>
+    .topIndex{
+        z-index: 99999;
+        height: 100vh;
+        position: relative;
+    }
+
+    .bottomIndex{
+        z-index: 9;
+        height: 100vh;
+        position: relative;
+    }
+
     .rv{
         width: 100%;
     }

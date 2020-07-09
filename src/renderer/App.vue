@@ -19,25 +19,25 @@
   /* CSS */
   #app{
     overflow: hidden;
+    width: 100%;
+    height: 100vh;
   }
 
   .livelv{
     background: #9BD7F1;
     color: white;
-    border-radius: 2px;
-    font-size:10px;
-    padding:0 5px;
+    border-radius: .02rem;
+    font-size:.10rem;
+    padding:0 .05rem;
     display: inline-block;
-    margin-bottom: 5px;
   }
 
   .lv{
-    border-radius: 2px;
+    border-radius: .02rem;
     color: white;
-    font-size:10px;
-    padding:0 5px;
+    font-size:.10rem;
+    padding:0 .05rem;
     display: inline-block;
-    margin-bottom: 5px;
   }
 
   .lv6{
