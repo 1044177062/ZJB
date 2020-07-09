@@ -30,28 +30,25 @@ export default {
         const packet = await decode(msgEvent.data);
         switch (packet.op) {
             case 8:
-                that.log.push({msg:'加入房间'})
+                that.log.push({msg:'---连接弹幕接口成功---'})
                 console.log(that.log)
             break;
             case 3:
             const count = packet.body.count
-                that.log.push({msg:`人气：${count}`})
             break;
             case 5:
-            packet.body.forEach((body)=>{
+            packet.body.forEach((body)=>{ 
                 switch (body.cmd) {
-                case 'DANMU_MSG':
-                    that.log.push({msg:`${body.info[2][1]}: ${body.info[1]}`})
-                    break;
-                case 'SEND_GIFT':
-                    that.log.push({msg:`${body.data.uname} ${body.data.action} ${body.data.num} 个 ${body.data.giftName}`})
-                    break;
-                case 'WELCOME':
-                     that.log.push({msg:`欢迎 ${body.data.uname}`})
-                    break;
-                // 此处省略很多其他通知类型
+                case 'NOTICE_MSG':
+                    let newbody=body.msg_common
+                    if(body.msg_common.indexOf('恭喜主播')){
+                        return;
+                    }
+                     newbody=newbody.slice(newbody.indexOf('个')-1,newbody.indexOf('，'))
+                     that.log.push({msg:newbody+'冲冲冲'})
+                     return;
                 default:
-                    console.log(body);
+                   console.log(body)
                 }
             })
             break;

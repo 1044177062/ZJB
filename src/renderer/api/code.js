@@ -51,12 +51,15 @@ export const decode = function(blob){
              *    https://github.com/nodeca/pako/blob/master/dist/pako.js
              * 2. message文本中截断掉不需要的部分，避免JSON.parse时出现问题
              */
-            let body = textDecoder.decode(pako.inflate(data));
+            let body = textDecoder.decode(data);
             if (body) {
-                console.log(JSON.parse(body.slice(body.indexOf("{"))))
-                result.body.push(JSON.parse(body.slice(body.indexOf("{"))));
+              try{
+                result.body.push(JSON.parse(body));
+              }catch(e){
+                body = pako.inflate(body);
+                result.body.push(JSON.parse(body));
+              }
             }
-  
             offset += packetLen;
           }
         }else if(result.op === 3){
